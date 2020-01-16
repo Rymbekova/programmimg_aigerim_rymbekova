@@ -7,8 +7,31 @@ In module 2 we learned how to score an alignment between two biological sequence
 
 s = Pab/qa*qb,
 
-where Pab is the probability of two characters from two sequences to be aligned divided by a product of their frequences. This ratio show if the likelihood of these characters to be aligned is more or less than expected by chance (randomly).
-Generally, we can score sequences by giving 1 point for each match of characters and 0 or -1 point for each mismatch. However, this scoring scheme is not particularly efficient in biological sense. For example, in case of DNA sequence alignment, a substitution between purine and purine or pyramidine and pyramidine is more common than purine and pyramidine or pyramidine and purine, thus these cases should be scored differently. 
-Speaking of proteins, the scoring scheme should be based on physicochemical properties of amino acids constitutuing two aligned proteins. There are different substitution matrices we can use for this purpose. The most common one is BLOSUM62, as it is a default substitution matrix of BLAST, a tool for biological databases search. Another common matrix is PAM250, it was derived by Margaret Dayhoff, 'mother of bioinformatics' in 1970s. The principle was to align proteins (with sequence identity >85%) from known at that time protein families and determine point accepted mutations - a substituion of a single amino acid by another single amino acid during certain evolutionary interval between related proteins. The first derived mtrix was PAM1, where was 1 substitution per 100 residues, consequtive matrices were derived by multiplying PAM1 matrix several times by itself. The most used ones these days are PAM100, 120, 200, 250 etc, they are used for scoring alignments of proteins of different relation degree. Example, PAM 250 matrix is for more diverged proteins, where in average 2,5 mutations of each residue per 100 residues occured or 250 substituions per 100 residues. 
-The BLOSUM (or BLOcks SUbstituion Matrix) was derived by Heinkoff in 1990s. Theer BLOSUM90, 80, 62, 45 etc. The principle was to go through BLOCKS database, look for conserved regions of different proteins and based on observed alignments between them, he determined log-odds ratio for each of 210 substituion pairs of 20 standard amino acids. Log-odds is the likelihood of AA to be substituted by another AA more or less than by chance, randomly.
-The main difference is that PAM is based on evolutionary model and BLOSUM is based on observed likelihood of AA to be replaced by another AA due to physicochemical properties.
+where Pab is the probability of two characters from two sequences to be aligned divided by a product of their frequences. 
+This ratio show if the likelihood of these characters to be aligned is more or less than expected by chance (randomly).
+Generally, we can score sequences by giving 1 point for each match of characters and 0 or -1 point for each mismatch. 
+However, this scoring scheme is not particularly efficient in biological sense. 
+For example, in case of DNA sequence alignment, a substitution between purine and purine or pyramidine 
+and pyramidine is more common than purine and pyramidine or pyramidine and purine, thus these cases should be 
+scored differently. 
+Speaking of proteins, the scoring scheme should be based on physicochemical properties of amino acids constitutuing 
+two aligned proteins. There are different substitution matrices we can use for this purpose. The most common one is BLOSUM62,
+as it is a default substitution matrix of BLAST, a tool for biological databases search. Another common matrix is PAM250, 
+it was derived by Margaret Dayhoff, 'mother of bioinformatics' in 1970s. The principle was to align proteins 
+(with sequence identity >85%) from known at that time protein families and determine point accepted mutations - a substituion 
+of a single amino acid by another single amino acid during certain evolutionary interval between related proteins. 
+The first derived mtrix was PAM1, where was 1 substitution per 100 residues, consequtive matrices were derived 
+by multiplying PAM1 matrix several times by itself. The most used ones these days are PAM100, 120, 200, 250 etc,
+they are used for scoring alignments of proteins of different relation degree. Example, PAM 250 matrix is for more 
+diverged proteins, where in average 2,5 mutations of each residue per 100 residues occured or 250 substituions 
+per 100 residues. 
+The BLOSUM (or BLOcks SUbstituion Matrix) was derived by Heinkoff in 1990s. Theer BLOSUM90, 80, 62, 45 etc. 
+The principle was to go through BLOCKS database, look for conserved regions of different proteins and based on 
+observed alignments between them, he determined log-odds ratio for each of 210 substituion pairs of 20 standard amino acids.
+Log-odds is the likelihood of AA to be substituted by another AA more or less than by chance, randomly.
+The main difference is that PAM is based on evolutionary model and BLOSUM is based on observed likelihood of AA to
+be replaced by another AA due to physicochemical properties.
+
+How do we use matrices for sequence alignment?
+Both matrices look similar, their first row and the first column show 20 aminoacids.
+Each entry show a likelihood of AA of a row to be replaced by AA of a column.
