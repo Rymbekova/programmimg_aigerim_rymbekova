@@ -35,3 +35,5 @@ be replaced by another AA due to physicochemical properties.
 How do we use matrices for sequence alignment?
 Both matrices look similar, their first row and the first column show 20 aminoacids.
 Each entry show a likelihood of AA of a row to be replaced by AA of a column.
+
+(THE REST IS ON THE PAPER)
