@@ -9,7 +9,7 @@ with open('pam250square.txt', 'r') as p:
 			pam[keys[i]] = local
 
 blosum = {} #blosumdictionary
-with open('blosum62.txt', 'r') as b:
+with open('blosum62square.txt', 'r') as b:
 	keys = b.readline(). rstrip().split()
 	for i in range(20):
 		line = b.readline().rstrip().split()[1:]
