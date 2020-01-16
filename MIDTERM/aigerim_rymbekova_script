@@ -1,1 +1,75 @@
+pam = {} #pamdictionary
+with open('pam250square.txt', 'r') as p:
+	keys = p.readline(). rstrip().split()
+	for i in range(20):
+		line = p.readline().rstrip().split()[1:]
+		local = {}
+		for j in range (len(line)):
+			local[keys[j]] = int(line[j])
+			pam[keys[i]] = local
+
+blosum = {} #blosumdictionary
+with open('blosum62.txt', 'r') as b:
+	keys = b.readline(). rstrip().split()
+	for i in range(20):
+		line = b.readline().rstrip().split()[1:]
+		new= {}
+		for j in range(len(line)):
+			new[keys[j]] = int(line[j])
+			blosum[keys[i]] = new
+
+def scoringp (x,y): #scoringbypam
+	score = 0
+	d = -2
+	for i in range(len(x)):
+		pair = x[i] + y[i]
+		if '-' in pair:
+			score = score + d
+		else:
+			score = score + int(pam[x[i]][y[i]])
+	return score
+
+
+def scoringb (x,y): #scoringbyblosum
+	score = 0
+	d = -2
+	for i in range(len(x)):
+		pair = x[i] + y[i]
+		if '-' in pair:
+			score = score + d
+		else:
+			score = score + int(blosum[x[i]][y[i]])
+	return score
+
+
+def lis(x): #listingalignments
+	print 'Alignment:', '\n', x[0], '\n', x[1]
+	print 'PAM250: ', scoringp (x[0], x[1])
+	print 'BLOSUM62: ', scoringb (x[0], x[1])
+
+#giving sequences directly
+al1 = ['GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKL','GNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKL']
+al2 = ['GSAQVKGHGKKVADALTNAVAHV---D--DMPNALSALSDLHAHKL','NNPELQAHAGKVFKLVYEAAIQLQVTGVVVTDATLKNLGSVHVSKG']
+al3 = ['GSAQVKGHGKKVADALTNAVAHVDDMPNALSALS----DLHAHKL','GSGYLVGDSLTFVDL--LVAQHTADLLAANAALLDEFPQFKAHQE']
+
+lis(al1)
+lis(al2)
+lis(al3)
+
+#reading from fasta file
+alignlist = []
+with open ('seq.txt', 'r') as s:
+	for line in s:
+		if '>' not in line:
+			alignlist.append(line.rstrip('\n'))
+
+
+al1 = [alignlist[0], alignlist[1]]
+al2 = [alignlist[2], alignlist[3]]
+al3 = [alignlist[4], alignlist[5]]
+
+lis(al1)
+lis(al2)
+lis(al3)
+
 
