@@ -1,1 +1,1 @@
-#Algorithms for Sequence Alignment
+Algorithms for Sequence Alignment
